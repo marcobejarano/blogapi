@@ -37,9 +37,16 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     # 3rd-party apps
     "rest_framework",
     "corsheaders",
+    "rest_framework.authtoken",
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
     # Local
     "accounts.apps.AccountsConfig",
     "posts.apps.PostsConfig",
@@ -54,6 +61,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "django_project.urls"
@@ -135,6 +143,10 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+    ],
 }
 
 CORS_ORIGIN_WHITELIST = (
@@ -143,3 +155,14 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by email
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+SITE_ID = 1
