@@ -1,0 +1,4 @@
+- model: accounts.customuser
+  fields:
+    username: "mick"
+    password: "pbkdf2_sha256$870000$XPkLzz6hGBeJ5M5p6pB9uK$6yUIwC5wYk4WKxNmB+/lNSqNEK+5rXfloijbe+kKUl4="
